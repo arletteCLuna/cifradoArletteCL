@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado y Descifrado César</title>
+</head>
+
+<body>
+    <h1>Cifrado y Descifrado César</h1>
+    <label for="mensaje">Mensaje:</label>
+    <textarea id="mensaje" rows="4" cols="50"></textarea><br>
+    <label for="clave">Rango:</label>
+    <input type="number" id="clave"><br>
+    <button onclick="cifrar()">Cifrar</button>
+    <button onclick="descifrar()">Descifrar</button><br>
+    <label for="resultado">Resultado:</label>
+    <textarea id="resultado" rows="4" cols="50" readonly></textarea>
+    <h3>ARLETTE CRUZ LUNA 7B</h3>
+
+    <script>
+        function cifrar() {
+            var mensaje = document.getElementById("mensaje").value;
+            var clave = parseInt(document.getElementById("clave").value);
+            var resultado = "";
+            for (var i = 0; i < mensaje.length; i++) {
+                var char = mensaje.charAt(i);
+                if (char.match(/[a-z]/i)) {
+                    var codigo = mensaje.charCodeAt(i);
+                    if (char === char.toUpperCase()) {
+                        resultado += String.fromCharCode(((codigo - 65 + clave) % 26) + 65);
+                    } else {
+                        resultado += String.fromCharCode(((codigo - 97 + clave) % 26) + 97);
+                    }
+                } else if (char === "ñ" || char === "Ñ") {
+                    resultado += char; // Mantener la "ñ" o "Ñ" intacta
+                } else {
+                    resultado += char;
+                }
+            }
+            document.getElementById("resultado").value = resultado;
+        }
+
+        function descifrar() {
+            var mensaje = document.getElementById("mensaje").value;
+            var clave = parseInt(document.getElementById("clave").value);
+            clave = (26 - clave) % 26;
+            var resultado = "";
+            for (var i = 0; i < mensaje.length; i++) {
+                var char = mensaje.charAt(i);
+                if (char.match(/[a-z]/i)) {
+                    var codigo = mensaje.charCodeAt(i);
+                    if (char === char.toUpperCase()) {
+                        resultado += String.fromCharCode(((codigo - 65 + clave) % 26) + 65);
+                    } else {
+                        resultado += String.fromCharCode(((codigo - 97 + clave) % 26) + 97);
+                    }
+                } else if (char === "ñ" || char === "Ñ") {
+                    resultado += char; // Mantener la "ñ" o "Ñ" intacta
+                } else {
+                    resultado += char;
+                }
+            }
+            document.getElementById("resultado").value = resultado;
+        }
+
+    </script>
+    <style>
+         body {
+            background-color: rgb(0, 0, 0);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: rgb(255, 251, 251);
+            font-size: 25px;
+        }
+
+
+        h1 {
+            text-align: center;
+            background-color: rgb(0, 0, 0);
+            color: #faefef;
+            padding: 10px;
+            margin: 0;
+        }
+
+        label {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 500px;
+            height: 100px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 0 auto;
+            display: block;
+            font-size: 25px;
+        }
+
+        button {
+            background-color: #635b5b;
+            color: #ffffff;
+            font-size: 16px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #066e69;
+        }
+
+        textarea.readonly {
+            background-color: #ccc;
+            color: #000000;
+        }
+
+        .resultado {
+            margin-top: 20px;
+        }
+        input[type="text"],
+        input[type="number"] {
+            padding: 8px;
+            font-size: 30px;
+            width: 150px;
+            height: 30px;
+        }
+    </style>
+</body>
+
+</html>
